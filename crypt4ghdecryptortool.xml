@@ -1,24 +1,18 @@
-<tool id="crypt4ghdecryptortool" name="Crypt4GH Decryptor" version="0.1.0" python_template_version="3.5">
-    <requirements>
-        ## Iirc we don to need any requrement
-    </requirements>
-    <command detect_errors="exit_code">
-        touch decryptedFile.txt
-    </command>
-    <inputs>
-       ## <param name="input1" type="data" label="Input" help="Input for the python decrypt script" />
-    </inputs>
-    <outputs>
-        ## <data name="outfile" label="${tool.name} on ${on_string}" format="Insert desired format">
-    </outputs>
-    <macros>
-        <xml name="bio_tools">
-            <xrefs>
-                <xref type="bio.tools">Bellerophon</xref>
-            </xrefs>
-        </xml>
-    </macros>
+<tool id="crypt4ghdecryptortool" name="Crypt4GH Decryptor" version="0.1.0">
+  <command>
+	  crypt4gh-recryptor decrypt --header "$header" -i "$payload" -o "$decrypted_data" --decryption-key /home/user/GalaxySensitiveData-IS_py-recryptor/test_data/compute_node_key.priv
+  </command>
+  <inputs>
+    <param name="payload" type="data" format="crypt4gh_payload" label="Select encrpyted sensitive dataset (payload only)"/>
+    <param name="header"  type="data" format="crypt4gh_header"  label="Select header ()"/>
+
+  </inputs>
+  <outputs>
+     <data name="decrypted_data" auto_format="true" label="${tool.name}: ${payload.name} decrypted"></data>
+  </outputs>
+  <tests>
+  </tests>
     <help>
-        <description>Crypth4GH Decryption Tool</description>
+        <description>Crypth4GH Encryption Tool</description>
     </help>
 </tool>
